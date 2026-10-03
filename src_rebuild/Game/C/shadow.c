@@ -534,8 +534,10 @@ int clipAgainstZ(void)
 	dst = cv + lastcv + 2;
 	srccount = numcv-1;
 
-	flags = ((curr + numcv * 0x1fffffff)[1].vz > 0) << 1;
-	prev = curr + numcv * 0x1fffffff + 1;
+	// the PSX code wrote this as `curr + numcv * 0x1fffffff`, which only wraps around to
+	// `curr - numcv` in a 32-bit address space; on 64-bit it pointed gigabytes away
+	flags = ((curr - numcv)[1].vz > 0) << 1;
+	prev = curr - numcv + 1;
 
 	do {
 
