@@ -593,7 +593,7 @@ void PlaceCameraInCar(PLAYER *lp, int BumperCam)
 	else
 		camera_angle.vy = (lp->headPos >> 16) - baseDir & 4095;
 
-	if (cp && cp->ap.carCos)
+	if (cp)
 	{
 		// build custom matrix using car draw matrix
 		InvertMatrix(&cp->hd.drawCarMat, &inv_camera_matrix);
