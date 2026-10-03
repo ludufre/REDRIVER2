@@ -140,7 +140,7 @@ workspace "REDRIVER2"
 		filter "platforms:*-arm64"
 			architecture "arm64"
 	else
-		platforms { "x86", "x64" }
+		platforms { "x86", "x64", "arm64" }
 	end
 	
 	startproject "REDRIVER2"
@@ -155,7 +155,9 @@ workspace "REDRIVER2"
 			"-Wno-write-strings",
 			"-Wno-format-security",
 			"-Wno-unused-result",
-            "-fpermissive"
+            "-fpermissive",
+			"-fsigned-char",	-- the PSX code relies on signed char; ARM Linux defaults to unsigned
+			"-fno-strict-aliasing"	-- the PSX code type-puns struct fields through u_int/u_short pointers
         }
 		
 		cppdialect "C++11"
